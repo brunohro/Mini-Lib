@@ -1,0 +1,1 @@
+Ao apagar um autor que tem vários livros, os livros que correspondem aquele autor devem ser apagados juntos;
