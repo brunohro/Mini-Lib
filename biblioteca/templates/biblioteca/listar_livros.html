@@ -20,11 +20,18 @@
 <body>
     <h1>Listar Livros</h1>
     {% for livro in livros %}
-        <p>{{ livro.titulo }}</p>
-        <p>{{ livro.autor }}</p>
-        <p>{{ livro.ano_publicacao }}</p>
-        <br>
-        <hr>
+        <tr>
+            <td>{{ livro.titulo }}</td>
+
+            <td>
+                <a href="{% url 'autor' livro.autor.id %}">
+                    {{ livro.autor.nome }}
+                </a>
+            </td>
+
+            <td>{{ livro.ano_publicacao }}</td>
+            <td>{{ livro.disponivel }}</td>
+        </tr>
     {% endfor %}
 </body>
 </html>

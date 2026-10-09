@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ autor.nome }}</title>
+</head>
+<body>
+
+    <h1>{{ autor.nome }}</h1>
+
+    <p>
+        <strong>Nacionalidade:</strong>
+        {{ autor.nacionalidade }}
+    </p>
+
+    <h2>Livros</h2>
+
+    <ul>
+        {% for livro in autor.books.all %}
+            <li>{{ livro.titulo }}</li>
+        {% empty %}
+            <li>Este autor não possui livros cadastrados.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'listar_livros' %}">
+        Voltar para livros
+    </a>
+
+</body>
+</html>
