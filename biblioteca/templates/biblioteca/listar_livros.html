@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,29 +9,102 @@
             font-family: Arial, sans-serif;
             margin: 20px;
         }
+
         h1 {
             color: #333;
         }
-        p {
-            margin: 5px 0;
+
+        .Tabela-livro {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .Tabela-livro th,
+        .Tabela-livro td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .Tabela-livro th {
+            background-color: #f2f2f2;
+        }
+
+        .Tabela-livro tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
+
     <h1>Listar Livros</h1>
-    {% for livro in livros %}
+
+    <table class="Tabela-livro">
+
         <tr>
-            <td>{{ livro.titulo }}</td>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Ano de Publicação</th>
+            <th>Status</th>
+        </tr>
+
+        {% for livro in livros %}
+
+        <tr>
 
             <td>
-                <a href="{% url 'autor' livro.autor.id %}">
-                    {{ livro.autor.nome }}
-                </a>
+                {{ livro.titulo }}
             </td>
 
-            <td>{{ livro.ano_publicacao }}</td>
-            <td>{{ livro.disponivel }}</td>
+            <td>
+                {% for autor in livro.autores.all %}
+
+                    <a href="{% url 'autor' autor.id %}">
+                        {{ autor.nome }}
+                    </a>
+
+                    {% if not forloop.last %}
+                        ,
+                    {% endif %}
+
+                {% endfor %}
+            </td>
+
+            <td>
+                {{ livro.ano_publicacao }}
+            </td>
+
+            <td>
+                {% if livro.disponivel %}
+                    Disponível
+                {% else %}
+                    Indisponível
+                {% endif %}
+            </td>
+
         </tr>
-    {% endfor %}
+
+        {% empty %}
+
+        <tr>
+            <td colspan="4">
+                Nenhum livro cadastrado.
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
 </body>
 </html>
