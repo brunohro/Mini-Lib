@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -41,6 +42,43 @@
 
         a:hover {
             text-decoration: underline;
+        }
+                body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 30px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .autor {
+            display: block;
+            background: white;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .autor:hover {
+            background-color: #e8eefc;
+        }
+
+        .botao {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .botao:hover {
+            background-color: #1d4ed8;
         }
     </style>
 </head>
@@ -105,6 +143,21 @@
         {% endfor %}
 
     </table>
+
+
+    <br>
+    <h1>Lista de Autores</h1>
+    {% for autor in autores %}
+        <a class="autor" href="{% url 'autor' autor.id %}">
+            {{ autor.nome }}
+        </a>
+    {% empty %}
+        <p>Nenhum autor cadastrado.</p>
+    {% endfor %}
+
+    <a class="botao" href="{% url 'cadastro_autor' %}">
+        Cadastrar Novo Autor
+    </a>
 
 </body>
 </html>
