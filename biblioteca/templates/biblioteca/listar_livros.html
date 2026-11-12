@@ -130,6 +130,10 @@
                 {% endif %}
             </td>
 
+            <td>
+                <a href="{% url 'editar_livro' livro.id %}">Editar</a>
+            </td>
+
         </tr>
 
         {% empty %}
@@ -143,6 +147,9 @@
         {% endfor %}
 
     </table>
+    <a class="botao" href="{% url 'novo_livro' %}">
+        Cadastrar Novo Livro
+    </a>
 
 
     <br>
@@ -158,6 +165,7 @@
     <a class="botao" href="{% url 'cadastro_autor' %}">
         Cadastrar Novo Autor
     </a>
+
 
 </body>
 </html>
