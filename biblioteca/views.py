@@ -30,7 +30,11 @@ def cadastrar_editar_livro(request, livro_id=None):
         livro = None
 
     if request.method == 'POST':
-        form = LivroForm(request.POST, instance=livro)
+        form = LivroForm(
+            request.POST, 
+            request.FILES, 
+            instance=livro)
+        
         if form.is_valid():
             livro_salvo = form.save()
 
