@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import (MinLengthValidator, MinValueValidator, MaxValueValidator, RegexValidator)
+from django.utils import timezone
 
 
 class Autor(models.Model):
@@ -19,7 +21,9 @@ class Category(models.Model):
         return self.name
     
 class Livro(models.Model):
-    titulo = models.CharField(max_length=100)
+    titulo = models.CharField(max_length=100, validators=[
+        MinLengthValidator(3, 'O título precisa ter pelo menos 3 caracteres.'),
+    ])
 
     autores = models.ManyToManyField( #ligação de muitos para muitos entre Livro e autor
         Autor, 
@@ -33,7 +37,14 @@ class Livro(models.Model):
         blank=True
     )
 
-    ano_publicacao = models.IntegerField()
+    ano_publicacao = models.IntegerField(
+        validators=[
+            MinValueValidator(1450, 'O ano de publicação não pode ser anterior a 1450.'),
+            MaxValueValidator(
+                timezone.now().year, 
+                'O ano de publicação não pode ser maior que o ano atual'
+                )]
+    )
     disponivel = models.BooleanField(default=True)
 
     def __str__(self):
