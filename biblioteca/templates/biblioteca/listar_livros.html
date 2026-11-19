@@ -82,10 +82,11 @@
         }
     </style>
 </head>
-
 <body>
 
     <h1>Listar Livros</h1>
+
+    <a href="{% url 'sobre' %}">Sobre a Biblioteca</a>
 
     <table class="Tabela-livro">
 
@@ -94,6 +95,7 @@
             <th>Autor</th>
             <th>Ano de Publicação</th>
             <th>Status</th>
+            <th>Ações</th>
         </tr>
 
         {% for livro in livros %}
@@ -132,8 +134,8 @@
 
             <td>
                 <a href="{% url 'editar_livro' livro.id %}">Editar</a>
+                <a href="{% url 'excluir_livro' livro.id %}">Excluir</a>
             </td>
-
         </tr>
 
         {% empty %}
@@ -165,6 +167,7 @@
     <a class="botao" href="{% url 'cadastro_autor' %}">
         Cadastrar Novo Autor
     </a>
+    
 
 
 </body>
